@@ -158,7 +158,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0pI-ZB-hZF">
-                                <rect key="frame" x="0.0" y="200" width="393" height="642"/>
+                                <rect key="frame" x="0.0" y="200" width="393" height="547.66666666666663"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RegisterTableViewCell" rowHeight="100" id="AoO-Kf-NoY" customClass="RegisterTableViewCell" customModule="verification" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="100"/>
@@ -217,18 +217,27 @@
                                     <outlet property="delegate" destination="bNo-Oj-8HE" id="ht5-Bb-l27"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hhx-39-U20">
+                                <rect key="frame" x="0.0" y="747.66666666666663" width="393" height="34.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="注册"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jqq-zW-dEr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Jqq-zW-dEr" firstAttribute="trailing" secondItem="0pI-ZB-hZF" secondAttribute="trailing" id="0fO-Vz-Lbh"/>
                             <constraint firstItem="0pI-ZB-hZF" firstAttribute="top" secondItem="Jqq-zW-dEr" secondAttribute="top" constant="200" id="3xR-L0-JFc"/>
+                            <constraint firstItem="Hhx-39-U20" firstAttribute="leading" secondItem="Jqq-zW-dEr" secondAttribute="leading" id="4ZC-hR-PKI"/>
+                            <constraint firstItem="Jqq-zW-dEr" firstAttribute="trailing" secondItem="Hhx-39-U20" secondAttribute="trailing" id="BAq-gn-Mbr"/>
+                            <constraint firstItem="Jqq-zW-dEr" firstAttribute="bottom" secondItem="Hhx-39-U20" secondAttribute="bottom" constant="60" id="LhS-lu-aGf"/>
+                            <constraint firstItem="Hhx-39-U20" firstAttribute="top" secondItem="0pI-ZB-hZF" secondAttribute="bottom" id="PD9-9l-kio"/>
                             <constraint firstItem="0pI-ZB-hZF" firstAttribute="leading" secondItem="Jqq-zW-dEr" secondAttribute="leading" id="YMb-fb-M69"/>
-                            <constraint firstItem="Jqq-zW-dEr" firstAttribute="bottom" secondItem="0pI-ZB-hZF" secondAttribute="bottom" id="a1j-jp-Kuu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2Y8-e3-z55"/>
                     <connections>
+                        <outlet property="registerBtn" destination="Hhx-39-U20" id="X53-dI-4KN"/>
                         <outlet property="tableView" destination="0pI-ZB-hZF" id="CUc-M3-CUN"/>
                     </connections>
                 </viewController>

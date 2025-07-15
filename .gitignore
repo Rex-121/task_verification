@@ -87,5 +87,5 @@ iOSInjectionProject/
 
 verification/HSFaceData.*
 verification/HSFaceDetector.*
-
+Anvil/Net/SeInfo.swift
 # End of https://www.toptal.com/developers/gitignore/api/swift
