@@ -6,10 +6,21 @@
 //
 
 import UIKit
-
+import ReactiveSwift
+import ReactiveCocoa
 //import liv
+//import YPImagePicker
+import PhotosUI
+import PKHUD
+
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var nameText: UITextField!
+    @IBOutlet weak var psdText: UITextField!
+    
+    let manager = LoginManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +31,109 @@ class ViewController: UIViewController {
 //        LiveDetectController *liveVc = [[LiveDetectController alloc]init];
 
         // Do any additional setup after loading the view.
+        
+        let info = nameText.reactive.continuousTextValues.combineLatest(with: psdText.reactive.continuousTextValues).map { (name: $0, psw: $1) }
+        
+        manager.reactive.info <~ info.take(during: reactive.lifetime)
+        
+        
+    
+        navigationController?.reactive.removeLastThenPush <~ manager.loginAction
+            .values
+            .filter { $0.success }
+            .map({ _ in
+                VerificationViewController.verificationVC
+        })
+        
+        manager.loginAction.errors.observeValues { v in
+            print(v)
+        }
+        
+        loginBtn.reactive.pressed = CocoaAction(manager.loginAction, { [unowned self] _ in
+                .login(self.manager.data)
+        })
+        
+//        loginBtn.reactive.controlEvents(.touchUpInside).observeValues { [weak self] _ in
+////            let picker = YPImagePicker()
+////            picker.didFinishPicking { [unowned picker] items, _ in
+////                if let photo = items.singlePhoto {
+////                    print(photo.fromCamera) // Image source (camera or library)
+////                    print(photo.image) // Final image selected by the user
+////                    print(photo.originalImage) // original image selected by the user, unfiltered
+////                    print(photo.modifiedImage) // Transformed image, can be nil
+////                    print(photo.exifMeta) // Print exif meta data of original image.
+////                }
+////                picker.dismiss(animated: true, completion: nil)
+////            }
+//            self?.presentImageSourceOptions()
+////            self?.navigationController?.present(picker, animated: true, completion: nil)
+//        }
     }
+
+    
+    func presentPHPicker() {
+            var configuration = PHPickerConfiguration()
+            configuration.selectionLimit = 1 // 选择1张图片
+            configuration.filter = .images // 只选图片
+            
+            let picker = PHPickerViewController(configuration: configuration)
+            picker.delegate = self
+        self.navigationController?.present(picker, animated: true)
+        }
 
 
 }
 
+
+extension ViewController: PHPickerViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func presentImageSourceOptions() {
+        let alert = UIAlertController(title: "选择图片来源", message: nil, preferredStyle: .actionSheet)
+        
+        // 相册选项
+        alert.addAction(UIAlertAction(title: "相册", style: .default, handler: { _ in
+            self.presentImagePicker(sourceType: .photoLibrary)
+        }))
+        
+        // 相机选项（检查设备是否支持相机）
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            alert.addAction(UIAlertAction(title: "拍照", style: .default, handler: { _ in
+                self.presentImagePicker(sourceType: .camera)
+            }))
+        }
+        
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel))
+        
+        present(alert, animated: true)
+    }
+
+    func presentImagePicker(sourceType: UIImagePickerController.SourceType) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = sourceType
+        present(picker, animated: true)
+    }
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+           picker.dismiss(animated: true)
+           
+           guard let result = results.first else { return }
+           
+           result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] (object, error) in
+               if let image = object as? UIImage {
+                   DispatchQueue.main.async {
+                       print(image)
+//                       self?.imageView.image = image
+                   }
+               }
+           }
+       }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[.originalImage] as? UIImage {
+//                imageView.image = image
+                print(image)
+            }
+            picker.dismiss(animated: true)
+        }
+}

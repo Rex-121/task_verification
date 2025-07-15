@@ -10,4 +10,6 @@ target 'verification' do
   pod 'Moya/ReactiveSwift'
   pod 'ReactiveSwift'
   pod 'ReactiveCocoa'
+#  pod 'YPImagePicker'
+  pod 'PKHUD'
 end

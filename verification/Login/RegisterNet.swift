@@ -13,6 +13,7 @@ enum RegisterNet {
     /// 注册
     case register(_ data: Encodable)
     
+    case login(_ data: LoginBaseData)
     
 }
 
@@ -21,12 +22,14 @@ extension RegisterNet: VerificationBaseNet {
     var path: String {
         switch self {
         case .register: return "/gw/user-app"
+        case .login: return "/gw/user-app"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .register: return .post
+        case .login: return .get
         }
     }
     
@@ -35,6 +38,8 @@ extension RegisterNet: VerificationBaseNet {
         
         case .register(let data):
             return .requestJSONEncodable(data)
+        case .login(let data):
+            return .requestParameters(parameters: ["userPhone": data.userPhone, "userPwd": data.userPwd], encoding: URLEncoding())
         }
     }
     

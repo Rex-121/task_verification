@@ -16,9 +16,8 @@
 		A24962F52E26430500AB1C32 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24962E82E26430500AB1C32 /* TargetType.swift */; };
 		A24962F62E26430500AB1C32 /* VerificationBaseNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24962EC2E26430500AB1C32 /* VerificationBaseNet.swift */; };
 		A24962F72E26430500AB1C32 /* Response+Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24962E72E26430500AB1C32 /* Response+Result.swift */; };
-		A24962F82E26430500AB1C32 /* RegisterNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24962EB2E26430500AB1C32 /* RegisterNet.swift */; };
 		A24962F92E26430500AB1C32 /* NetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24962E52E26430500AB1C32 /* NetProvider.swift */; };
-		A24962FF2E2654C800AB1C32 /* SeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24962FE2E2654C800AB1C32 /* SeInfo.swift */; };
+		A249637F2E266A0600AB1C32 /* SeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A249637E2E266A0600AB1C32 /* SeInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,10 +30,9 @@
 		A24962E72E26430500AB1C32 /* Response+Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Response+Result.swift"; sourceTree = "<group>"; };
 		A24962E82E26430500AB1C32 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		A24962E92E26430500AB1C32 /* TResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TResult.swift; sourceTree = "<group>"; };
-		A24962EB2E26430500AB1C32 /* RegisterNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNet.swift; sourceTree = "<group>"; };
 		A24962EC2E26430500AB1C32 /* VerificationBaseNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationBaseNet.swift; sourceTree = "<group>"; };
 		A24962ED2E26430500AB1C32 /* VerificationBaseNetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationBaseNetProvider.swift; sourceTree = "<group>"; };
-		A24962FE2E2654C800AB1C32 /* SeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeInfo.swift; sourceTree = "<group>"; };
+		A249637E2E266A0600AB1C32 /* SeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeInfo.swift; sourceTree = "<group>"; };
 		AAFDFE9179146F11E6F71C34 /* Pods-verification.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-verification.debug.xcconfig"; path = "Target Support Files/Pods-verification/Pods-verification.debug.xcconfig"; sourceTree = "<group>"; };
 		E487D38EDA41BE86273100DA /* Pods-verification.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-verification.release.xcconfig"; path = "Target Support Files/Pods-verification/Pods-verification.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,8 +115,7 @@
 		A24962EE2E26430500AB1C32 /* Net */ = {
 			isa = PBXGroup;
 			children = (
-				A24962EB2E26430500AB1C32 /* RegisterNet.swift */,
-				A24962FE2E2654C800AB1C32 /* SeInfo.swift */,
+				A249637E2E266A0600AB1C32 /* SeInfo.swift */,
 				A24962EC2E26430500AB1C32 /* VerificationBaseNet.swift */,
 				A24962ED2E26430500AB1C32 /* VerificationBaseNetProvider.swift */,
 			);
@@ -259,16 +256,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A249637F2E266A0600AB1C32 /* SeInfo.swift in Sources */,
 				A24962F02E26430500AB1C32 /* AnvilSessionProvider.swift in Sources */,
 				A24962F12E26430500AB1C32 /* TResult.swift in Sources */,
 				A24962F22E26430500AB1C32 /* NetProvider+Methods.swift in Sources */,
-				A24962FF2E2654C800AB1C32 /* SeInfo.swift in Sources */,
 				A24962F32E26430500AB1C32 /* Anvil+Typealias.swift in Sources */,
 				A24962F42E26430500AB1C32 /* VerificationBaseNetProvider.swift in Sources */,
 				A24962F52E26430500AB1C32 /* TargetType.swift in Sources */,
 				A24962F62E26430500AB1C32 /* VerificationBaseNet.swift in Sources */,
 				A24962F72E26430500AB1C32 /* Response+Result.swift in Sources */,
-				A24962F82E26430500AB1C32 /* RegisterNet.swift in Sources */,
 				A24962F92E26430500AB1C32 /* NetProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,7 +291,8 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = verification/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "验证";
+				INFOPLIST_KEY_NSCameraUsageDescription = "使用相机进行身份证拍照";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "使用相册获取照片";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -338,7 +335,8 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = verification/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "验证";
+				INFOPLIST_KEY_NSCameraUsageDescription = "使用相机进行身份证拍照";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "使用相册获取照片";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

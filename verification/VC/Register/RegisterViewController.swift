@@ -34,9 +34,7 @@ class RegisterViewController: UIViewController {
         for value in types {
             tableView.register(UINib(nibName: "RegisterTableViewCell", bundle: nil), forCellReuseIdentifier: value.title)
         }
-        
-//        reactive
-        
+                
         
         registerAction.values.observeValues { [weak self] v in
             print(v)
