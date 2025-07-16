@@ -276,19 +276,19 @@
             </objects>
             <point key="canvasLocation" x="1006.8702290076335" y="3.5211267605633805"/>
         </scene>
-        <!--View Controller-->
+        <!--Card Verify View Controller-->
         <scene sceneID="Z17-sM-q8V">
             <objects>
-                <viewController id="XEC-8D-PKY" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IDCardVerifyViewController" id="XEC-8D-PKY" customClass="IDCardVerifyViewController" customModule="verification" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kP0-yh-GHF">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XfQ-2D-MKf">
-                                <rect key="frame" x="0.0" y="59" width="393" height="310"/>
+                                <rect key="frame" x="15" y="59" width="363" height="310"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份证正面" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQj-ds-H2B">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="363" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="7HF-BE-s26"/>
                                         </constraints>
@@ -297,7 +297,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fbm-gT-d4Z">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="260"/>
+                                        <rect key="frame" x="0.0" y="50" width="363" height="260"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="260" id="hKA-Ua-MiW"/>
                                         </constraints>
@@ -305,10 +306,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="91n-HF-jKc">
-                                <rect key="frame" x="0.0" y="369" width="393" height="310"/>
+                                <rect key="frame" x="15" y="369" width="363" height="310"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份证反面" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fS-PC-4SX">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="363" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="NZi-7Y-MKE"/>
                                         </constraints>
@@ -317,25 +318,54 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jep-rk-Nkf">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="260"/>
+                                        <rect key="frame" x="0.0" y="50" width="363" height="260"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="260" id="5ew-Wv-MvO"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWd-Om-50g">
+                                <rect key="frame" x="15" y="419" width="363" height="260"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="back:" destination="XEC-8D-PKY" eventType="touchUpInside" id="akM-Wn-aRw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceP-mo-eUI">
+                                <rect key="frame" x="15" y="109" width="363" height="260"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="front:" destination="XEC-8D-PKY" eventType="touchUpInside" id="J59-sL-rdE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vPi-mD-CMv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ceP-mo-eUI" firstAttribute="trailing" secondItem="fbm-gT-d4Z" secondAttribute="trailing" id="06I-eL-H96"/>
+                            <constraint firstItem="YWd-Om-50g" firstAttribute="top" secondItem="Jep-rk-Nkf" secondAttribute="top" id="0CO-0p-FRn"/>
+                            <constraint firstItem="ceP-mo-eUI" firstAttribute="leading" secondItem="fbm-gT-d4Z" secondAttribute="leading" id="0qF-rh-1KT"/>
                             <constraint firstItem="91n-HF-jKc" firstAttribute="top" secondItem="XfQ-2D-MKf" secondAttribute="bottom" id="4JJ-Yj-evK"/>
-                            <constraint firstItem="vPi-mD-CMv" firstAttribute="trailing" secondItem="XfQ-2D-MKf" secondAttribute="trailing" id="7dO-OO-K02"/>
-                            <constraint firstItem="XfQ-2D-MKf" firstAttribute="leading" secondItem="vPi-mD-CMv" secondAttribute="leading" id="K8w-t1-SOb"/>
+                            <constraint firstItem="YWd-Om-50g" firstAttribute="trailing" secondItem="Jep-rk-Nkf" secondAttribute="trailing" id="EqP-ON-3Eh"/>
+                            <constraint firstItem="YWd-Om-50g" firstAttribute="bottom" secondItem="Jep-rk-Nkf" secondAttribute="bottom" id="Fgc-NF-FaX"/>
+                            <constraint firstItem="XfQ-2D-MKf" firstAttribute="leading" secondItem="vPi-mD-CMv" secondAttribute="leading" constant="15" id="K8w-t1-SOb"/>
+                            <constraint firstItem="ceP-mo-eUI" firstAttribute="bottom" secondItem="fbm-gT-d4Z" secondAttribute="bottom" id="OV4-lA-fSC"/>
                             <constraint firstItem="91n-HF-jKc" firstAttribute="leading" secondItem="XfQ-2D-MKf" secondAttribute="leading" id="VQh-o6-lcE"/>
+                            <constraint firstItem="YWd-Om-50g" firstAttribute="leading" secondItem="Jep-rk-Nkf" secondAttribute="leading" id="ahs-HX-Xbv"/>
                             <constraint firstItem="XfQ-2D-MKf" firstAttribute="top" secondItem="vPi-mD-CMv" secondAttribute="top" id="gAm-Fz-jJD"/>
+                            <constraint firstItem="ceP-mo-eUI" firstAttribute="top" secondItem="fbm-gT-d4Z" secondAttribute="top" id="j6h-z3-Baq"/>
+                            <constraint firstItem="XfQ-2D-MKf" firstAttribute="centerX" secondItem="kP0-yh-GHF" secondAttribute="centerX" id="xcE-eX-Ahq"/>
                             <constraint firstItem="91n-HF-jKc" firstAttribute="centerX" secondItem="kP0-yh-GHF" secondAttribute="centerX" id="yI6-hZ-y8I"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backId" destination="Jep-rk-Nkf" id="jdG-i9-ExS"/>
+                        <outlet property="frontId" destination="fbm-gT-d4Z" id="5p2-jn-fRl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iME-C1-syV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

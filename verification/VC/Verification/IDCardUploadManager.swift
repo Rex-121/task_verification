@@ -1,16 +1,15 @@
 //
-//  VerifyThreeManager.swift
+//  IDCardUploadManager.swift
 //  verification
 //
 //  Created by Tyrant on 2025/7/16.
 //
 
 import Foundation
-import ReactiveCocoa
 import ReactiveSwift
+import ReactiveCocoa
 
-class VerifyThreeManager {
-    
+class IDCardUploadManager {
     
     let net = VerificationBaseNetProvider<VerifyNet>()
         
@@ -22,19 +21,4 @@ class VerifyThreeManager {
     
     var data = ThreeVerifyData()
     
-}
-
-extension VerifyThreeManager: ReactiveExtensionsProvider {
-}
-
-struct VerifyThreeResponse: Decodable {
-    /**
-     "msg": "身份证不合法",
-             "code": 400,
-             "data": null,
-             "success": false
-     */
-    
-    let msg: String?
-    let code: Int
 }

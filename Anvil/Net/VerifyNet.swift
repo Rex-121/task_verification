@@ -7,25 +7,35 @@
 
 import Foundation
 import Moya
+import UIKit
 
 enum VerifyNet {
     
     /// 三要素
     case three(_ data: ThreeVerifyData)
     
-//    case login(_ data: LoginBaseData)
+    
+    case uploadIdCard(IDCardVerifyViewController.IDType, UIImage)
+    //    case login(_ data: LoginBaseData)
     
 }
 
 extension VerifyNet: VerificationBaseNet {
     var path: String {
-        return "/gw/identity/3"
+        
+        switch self {
+        case .three:
+            return "/gw/identity/3"
+        case .uploadIdCard:
+            return "/gw/upload/card"
+        }
     }
     
     var method: Moya.Method {
         switch self {
         case .three:
             return .get
+        case .uploadIdCard: return .post
         }
     }
     
@@ -34,6 +44,30 @@ extension VerifyNet: VerificationBaseNet {
         case .three(let data):
             return .requestParameters(parameters: data.dic,
                                       encoding: URLEncoding())
+        case let .uploadIdCard(type, image):
+            
+            var formData = [MultipartFormData]()
+            
+            guard let imageData = image.jpegData(compressionQuality: 0.7) else { return .requestPlain }
+            formData.append(MultipartFormData(
+                provider: .data(imageData),
+                name: "file",
+                fileName: "image.jpg",
+                mimeType: "image/jpeg"
+            ))
+            
+            formData.append(MultipartFormData(
+                provider: .data((User.shared.data?.id ?? "").data(using: .utf8)!),
+                name: "userId"
+            ))
+            
+            formData.append(MultipartFormData(
+                provider: .data(type.key.data(using: .utf8)!),
+                name: "type"
+            ))
+            
+            
+            return .uploadMultipart(formData)
         }
     }
     
@@ -43,7 +77,7 @@ extension VerifyNet: VerificationBaseNet {
 
 class ThreeVerifyData: Encodable {
     
-    var userId: String = ""
+    let userId: String = User.shared.data?.id ?? ""
     var name: String = ""
     var idCard: String = ""
     var mobile: String = ""
@@ -68,8 +102,8 @@ class ThreeVerifyData: Encodable {
  三要素查询
  /gw/identity/3  GET请求
  参数
-     1. userId -> 用户id
-     2. name -> 用户姓名
-     3. idCard -> 用户身份证号
-     4. mobile -> 用户手机号
+ 1. userId -> 用户id
+ 2. name -> 用户姓名
+ 3. idCard -> 用户身份证号
+ 4. mobile -> 用户手机号
  */

@@ -33,6 +33,7 @@ extension VerificationViewController: UITableViewDelegate {
         case .threeObjects:
             navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VerifyThreeObjectsViewController"), animated: true)
         case .idCard:
+            navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "IDCardVerifyViewController"), animated: true)
             break
         case .facialDetector:
             break

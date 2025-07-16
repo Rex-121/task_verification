@@ -60,6 +60,14 @@ extension Action where Output == BasicInfo, Error == AnvilNetError {
     
 }
 
+//extension Action where Output == (any Decodable, BasicInfo), Error == AnvilNetError {
+//    
+//    var allMessagesx: Signal<String?, Never> {
+//        return values.map { $0.1.message }.merge(with: errors.map { $0.description })
+//    }
+//    
+//}
+
 
 extension Reactive where Base: AnyObject {
     func binding<Value>(for keyPath: ReferenceWritableKeyPath<Base, Value>) -> BindingTarget<Value> {

@@ -26,7 +26,8 @@ class VerifyThreeObjectsViewController: UIViewController {
             tableView.register(UINib(nibName: "RegisterTableViewCell", bundle: nil), forCellReuseIdentifier: value.title)
         }
         
-        reactive.toast <~ manager.verifyThreeAction.allMessages
+        reactive.toast <~ manager.verifyThreeAction.errors.map { $0.description }
+            .merge(with: manager.verifyThreeAction.values.map { $0.msg })
         
     }
     

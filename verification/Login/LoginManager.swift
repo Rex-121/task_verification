@@ -11,12 +11,11 @@ import ReactiveSwift
 
 class LoginManager {
     
-    
     let net = VerificationBaseNetProvider<RegisterNet>()
         
-    lazy var loginAction: Action<RegisterNet, BasicInfo, AnvilNetError> = {
+    lazy var loginAction: Action<RegisterNet, (UserData, BasicInfo), AnvilNetError> = {
         return Action { [unowned self] model in
-            return self.net.brief(model)
+            return self.net.briefing(model, UserData.self)
         }
     }()
     
