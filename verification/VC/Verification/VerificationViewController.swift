@@ -14,7 +14,7 @@ class VerificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        navigationItem.title = "认证"
         
     }
     
@@ -22,6 +22,26 @@ class VerificationViewController: UIViewController {
         UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VerificationViewController")
     }
 }
+
+extension VerificationViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = types[indexPath.section]
+        
+        switch cell {
+            
+        case .threeObjects:
+            navigationController?.pushViewController(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VerifyThreeObjectsViewController"), animated: true)
+        case .idCard:
+            break
+        case .facialDetector:
+            break
+        }
+        
+    }
+    
+}
+
 
 
 extension VerificationViewController: UITableViewDataSource {

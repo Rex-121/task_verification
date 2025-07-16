@@ -40,3 +40,31 @@ extension Reactive where Base == UINavigationController {
     }
     
 }
+
+import Toast_Swift
+extension Reactive where Base: UIViewController {
+    
+    var toast: BindingTarget<String?> {
+        return makeBindingTarget(on: UIScheduler()) { base, value in
+            base.view?.makeToast(value, duration: 0.3, position: .center)
+        }
+    }
+    
+}
+//Action<RegisterNet, BasicInfo, AnvilNetError>
+extension Action where Output == BasicInfo, Error == AnvilNetError {
+    
+    var allMessages: Signal<String?, Never> {
+        return values.map { $0.message }.merge(with: errors.map { $0.description })
+    }
+    
+}
+
+
+extension Reactive where Base: AnyObject {
+    func binding<Value>(for keyPath: ReferenceWritableKeyPath<Base, Value>) -> BindingTarget<Value> {
+        return makeBindingTarget { base, value in
+            base[keyPath: keyPath] = value
+        }
+    }
+}

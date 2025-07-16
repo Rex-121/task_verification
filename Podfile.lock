@@ -8,11 +8,13 @@ PODS:
   - ReactiveCocoa (11.2.2):
     - ReactiveSwift (~> 6.6)
   - ReactiveSwift (6.6.1)
+  - Toast-Swift (5.1.1)
 
 DEPENDENCIES:
   - Moya/ReactiveSwift
   - ReactiveCocoa
   - ReactiveSwift
+  - Toast-Swift (~> 5.1.1)
 
 SPEC REPOS:
   trunk:
@@ -20,13 +22,15 @@ SPEC REPOS:
     - Moya
     - ReactiveCocoa
     - ReactiveSwift
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   ReactiveCocoa: e539cd41c523c8c80851b88e9723235c933b024b
   ReactiveSwift: fab34244ad908808dc822bae352a058c8837c4ca
+  Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
 
-PODFILE CHECKSUM: f515527b311e3a49dfd9a3db4ad8925e22ec9362
+PODFILE CHECKSUM: 9159a9d16b19866edf9bbe791cb49f60107785f6
 
 COCOAPODS: 1.16.2

@@ -18,6 +18,7 @@ class RegisterTableViewCell: UITableViewCell {
     var type: RegisterCellType? {
         didSet {
             title.text = type?.title
+            input.placeholder = "请输入" + (title.text ?? "")
         }
     }
     

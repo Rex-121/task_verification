@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		24C9BA1947BD106A246F012D /* Pods_verification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F5B24B7622AAC5B8B59B746 /* Pods_verification.framework */; };
+		A23C86D12E2799D0001A382E /* RegisterNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23C86B02E2799D0001A382E /* RegisterNet.swift */; };
+		A23C86EC2E279C70001A382E /* VerifyNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23C86EB2E279C70001A382E /* VerifyNet.swift */; };
 		A24962F02E26430500AB1C32 /* AnvilSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24962E42E26430500AB1C32 /* AnvilSessionProvider.swift */; };
 		A24962F12E26430500AB1C32 /* TResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24962E92E26430500AB1C32 /* TResult.swift */; };
 		A24962F22E26430500AB1C32 /* NetProvider+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24962E62E26430500AB1C32 /* NetProvider+Methods.swift */; };
@@ -22,6 +24,8 @@
 
 /* Begin PBXFileReference section */
 		4F5B24B7622AAC5B8B59B746 /* Pods_verification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_verification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A23C86B02E2799D0001A382E /* RegisterNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNet.swift; sourceTree = "<group>"; };
+		A23C86EB2E279C70001A382E /* VerifyNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyNet.swift; sourceTree = "<group>"; };
 		A249624B2E24D0A900AB1C32 /* verification.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = verification.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24962E32E26430500AB1C32 /* Anvil+Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anvil+Typealias.swift"; sourceTree = "<group>"; };
 		A24962E42E26430500AB1C32 /* AnvilSessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnvilSessionProvider.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				A249637E2E266A0600AB1C32 /* SeInfo.swift */,
+				A23C86B02E2799D0001A382E /* RegisterNet.swift */,
+				A23C86EB2E279C70001A382E /* VerifyNet.swift */,
 				A24962EC2E26430500AB1C32 /* VerificationBaseNet.swift */,
 				A24962ED2E26430500AB1C32 /* VerificationBaseNetProvider.swift */,
 			);
@@ -266,6 +272,8 @@
 				A24962F62E26430500AB1C32 /* VerificationBaseNet.swift in Sources */,
 				A24962F72E26430500AB1C32 /* Response+Result.swift in Sources */,
 				A24962F92E26430500AB1C32 /* NetProvider.swift in Sources */,
+				A23C86D12E2799D0001A382E /* RegisterNet.swift in Sources */,
+				A23C86EC2E279C70001A382E /* VerifyNet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +306,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -342,7 +350,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -75,6 +75,9 @@
                                             <constraint firstItem="Dai-1g-KwC" firstAttribute="top" secondItem="Oi4-NU-2GZ" secondAttribute="top" id="pwu-6l-wWQ"/>
                                             <constraint firstAttribute="trailing" secondItem="aJF-au-ls3" secondAttribute="trailing" id="wbE-X0-mfv"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="defaultCorner" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIg-Gv-iHi">
                                         <rect key="frame" x="0.0" y="60" width="333" height="40"/>
@@ -114,6 +117,9 @@
                                             <constraint firstItem="tOj-oK-vVD" firstAttribute="leading" secondItem="mIg-Gv-iHi" secondAttribute="leading" id="fdS-g3-TgX"/>
                                             <constraint firstItem="JHe-ni-yWs" firstAttribute="leading" secondItem="tOj-oK-vVD" secondAttribute="trailing" id="h0S-sU-3Ln"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="defaultCorner" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -132,6 +138,9 @@
                                     </backgroundConfiguration>
                                     <color key="baseForegroundColor" systemColor="labelColor"/>
                                 </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="defaultCorner" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HK0-aC-ukg">
                                 <rect key="frame" x="30" y="576" width="75" height="34.333333333333371"/>
@@ -171,7 +180,7 @@
             </objects>
             <point key="canvasLocation" x="43.511450381679388" y="3.5211267605633805"/>
         </scene>
-        <!--Register View Controller-->
+        <!--认证-->
         <scene sceneID="iLm-1L-CIy">
             <objects>
                 <viewController id="bNo-Oj-8HE" customClass="RegisterViewController" customModule="verification" customModuleProvider="target" sceneMemberID="viewController">
@@ -257,7 +266,7 @@
                             <constraint firstItem="0pI-ZB-hZF" firstAttribute="leading" secondItem="Jqq-zW-dEr" secondAttribute="leading" id="YMb-fb-M69"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="2Y8-e3-z55"/>
+                    <navigationItem key="navigationItem" title="认证" id="2Y8-e3-z55"/>
                     <connections>
                         <outlet property="registerBtn" destination="Hhx-39-U20" id="X53-dI-4KN"/>
                         <outlet property="tableView" destination="0pI-ZB-hZF" id="CUc-M3-CUN"/>
@@ -344,7 +353,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="VerificationViewControllerCell" rowHeight="98" id="a7j-89-STR" customClass="VerificationViewControllerCell" customModule="verification" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="VerificationViewControllerCell" rowHeight="98" id="a7j-89-STR" customClass="VerificationViewControllerCell" customModule="verification" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.333332061767578" width="393" height="98"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a7j-89-STR" id="rI2-G9-lJL">
@@ -438,19 +447,45 @@
             </objects>
             <point key="canvasLocation" x="350" y="-685"/>
         </scene>
-        <!--View Controller-->
+        <!--Verify Three Objects View Controller-->
         <scene sceneID="uH3-MS-idV">
             <objects>
-                <viewController id="7Jd-tj-K1m" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VerifyThreeObjectsViewController" id="7Jd-tj-K1m" customClass="VerifyThreeObjectsViewController" customModule="verification" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uwc-t5-sGs">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="w35-T8-ISQ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="w35-T8-ISQ">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="VerifyThreeCellButton" id="dNd-hy-7Fz" customClass="VerifyThreeCellButton" customModule="verification" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="35"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dNd-hy-7Fz" id="FL6-N6-P85">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="35"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tO-1a-7N2">
+                                                    <rect key="frame" x="0.0" y="0.0" width="393" height="35"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="认证"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="0tO-1a-7N2" secondAttribute="trailing" id="UvP-OY-DKg"/>
+                                                <constraint firstItem="0tO-1a-7N2" firstAttribute="top" secondItem="FL6-N6-P85" secondAttribute="top" id="gTc-yS-b8p"/>
+                                                <constraint firstItem="0tO-1a-7N2" firstAttribute="leading" secondItem="FL6-N6-P85" secondAttribute="leading" id="naf-Tt-NMq"/>
+                                                <constraint firstAttribute="bottom" secondItem="0tO-1a-7N2" secondAttribute="bottom" id="v6y-fQ-Gdc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="btn" destination="0tO-1a-7N2" id="DWb-ry-h08"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="7Jd-tj-K1m" id="1Om-6d-9Ej"/>
+                                    <outlet property="dataSource" destination="7Jd-tj-K1m" id="LZ3-fW-UcQ"/>
                                     <outlet property="delegate" destination="7Jd-tj-K1m" id="9VA-Sa-3Jm"/>
                                 </connections>
                             </tableView>
@@ -464,6 +499,9 @@
                             <constraint firstItem="w35-T8-ISQ" firstAttribute="leading" secondItem="IX3-gO-BH8" secondAttribute="leading" id="tiD-NJ-MoS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="w35-T8-ISQ" id="Bkb-nZ-lx6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z6M-Qu-w4e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
