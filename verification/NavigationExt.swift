@@ -50,6 +50,12 @@ extension Reactive where Base: UIViewController {
         }
     }
     
+    func toast(_ duration: Double) -> BindingTarget<String?> {
+        return makeBindingTarget(on: UIScheduler()) { base, value in
+            base.view?.makeToast(value, duration: duration, position: .center)
+        }
+    }
+    
 }
 //Action<RegisterNet, BasicInfo, AnvilNetError>
 extension Action where Output == BasicInfo, Error == AnvilNetError {

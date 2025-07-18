@@ -16,6 +16,21 @@ class VerificationViewController: UIViewController {
         
         navigationItem.title = "认证"
         
+        
+        // 设置位置更新回调
+        LocationManager.shared.locationUpdateHandler = { [weak self] location in
+            
+            print(location)
+            DispatchQueue.main.async {
+                //                        self?.updateUI(with: location)
+            }
+        }
+        
+        
+        // 请求定位权限
+        LocationManager.shared.requestLocationPermission()
+      
+        ContactsManager.shared.start()
     }
     
     static var verificationVC: UIViewController {

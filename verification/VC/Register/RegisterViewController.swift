@@ -43,9 +43,7 @@ class RegisterViewController: UIViewController {
             }
         }
         
-        registerAction.errors.observeValues { v in
-            print(v)
-        }
+        reactive.toast(0.5) <~ registerAction.errors.map { $0.description }
         
         registerBtn.reactive.pressed = CocoaAction(registerAction, input: .register(registerData))
     }

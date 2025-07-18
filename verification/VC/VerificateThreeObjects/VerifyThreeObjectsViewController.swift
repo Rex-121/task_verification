@@ -17,10 +17,13 @@ class VerifyThreeObjectsViewController: UIViewController {
     
     let manager = VerifyThreeManager()
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "认证"
+        
         
         for value in cells {
             tableView.register(UINib(nibName: "RegisterTableViewCell", bundle: nil), forCellReuseIdentifier: value.title)
@@ -28,7 +31,7 @@ class VerifyThreeObjectsViewController: UIViewController {
         
         reactive.toast <~ manager.verifyThreeAction.errors.map { $0.description }
             .merge(with: manager.verifyThreeAction.values.map { $0.msg })
-        
+    
     }
     
 }

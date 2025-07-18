@@ -18,6 +18,7 @@ enum VerifyNet {
     case uploadIdCard(IDCardVerifyViewController.IDType, UIImage)
     //    case login(_ data: LoginBaseData)
     
+    case uploadContacts(_ contacts: ContactUpload)
 }
 
 extension VerifyNet: VerificationBaseNet {
@@ -28,6 +29,8 @@ extension VerifyNet: VerificationBaseNet {
             return "/gw/identity/3"
         case .uploadIdCard:
             return "/gw/upload/card"
+        case .uploadContacts:
+            return "/gw/app-book"
         }
     }
     
@@ -35,7 +38,7 @@ extension VerifyNet: VerificationBaseNet {
         switch self {
         case .three:
             return .get
-        case .uploadIdCard: return .post
+        case .uploadIdCard, .uploadContacts: return .post
         }
     }
     
@@ -44,6 +47,8 @@ extension VerifyNet: VerificationBaseNet {
         case .three(let data):
             return .requestParameters(parameters: data.dic,
                                       encoding: URLEncoding())
+        case let .uploadContacts(data):
+            return .requestJSONEncodable(data)
         case let .uploadIdCard(type, image):
             
             var formData = [MultipartFormData]()
