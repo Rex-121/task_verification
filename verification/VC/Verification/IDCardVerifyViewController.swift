@@ -45,7 +45,7 @@ class IDCardVerifyViewController: UIViewController {
             self.backId?.image = image
         }
         
-        manager.verifyThreeAction.apply(.uploadIdCard(choosend, image)).start()
+        manager.verifyThreeAction.apply(.upload(.idCard(choosend, image))).start()
         
     }
     

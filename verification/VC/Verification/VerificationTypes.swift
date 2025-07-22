@@ -13,6 +13,8 @@ enum VerificationTypes: Int, CaseIterable {
     /// 三要素
     case threeObjects = 1
     
+    case contacts = 2
+    
     case idCard = 3
     
     case facialDetector = 4
@@ -24,6 +26,7 @@ extension VerificationTypes {
     var display: (title: String, des: String) {
         switch self {
         case .threeObjects: return ("三要素认证", "认证您的姓名和身份证号")
+        case .contacts: return ("通讯录", "提交通讯录信息")
         case .idCard:  return ("身份证认证", "请上传身份证正反面")
         case .facialDetector:  return ("人脸识别", "进行人脸识别")
         }

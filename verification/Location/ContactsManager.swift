@@ -16,27 +16,29 @@ class ContactsManager {
     
     let net = VerificationBaseNetProvider<VerifyNet>()
     
-    func start() {
+    func start(completion: @escaping ([ContactData]) -> Void) {
         DispatchQueue.main.async {
             
             ContactsManager.shared.requestContactsAccess { b in
                 print("获取通讯录 \(b)")
                 
                 ContactsManager.shared.fetchContacts { [weak self] con, _ in
-                    self?.to(con?.map { ContactData(c: $0) })
+                    completion(con?.map { ContactData(c: $0) } ?? [])
+//                    self?.to(con?.map { ContactData(c: $0) })
                 }
             }
         }
         
     }
     
-    func to(_ all: [ContactData]?) {
-        guard let all = all, !all.isEmpty else { return }
-        
-        self.net.detach(.uploadContacts(ContactUpload(param: all)))
-            .retry(upTo: 3, interval: 3, on: QueueScheduler())
-            .start()
-    }
+//    func to(_ all: [ContactData]?) -> SignalProducer<(), AnvilNetError> {
+////        guard let all = all, !all.isEmpty else { return }
+//        
+//        print(all)
+//        return self.net.detach(.upload(.contacts(ContactUpload(param: all ?? []))))
+//            .retry(upTo: 3, interval: 3, on: QueueScheduler())
+////            .start()
+//    }
     
     func requestContactsAccess(completion: @escaping (Bool) -> Void) {
         let store = CNContactStore()
@@ -113,16 +115,12 @@ struct ContactData: Encodable {
             if let label = labeledValue.label {
                 let localizedLabel = CNLabeledValue<NSString>.localizedString(forLabel: label)
                 
-//                print("\(localizedLabel): \(labeledValue.value.stringValue)")
-                
-                if label == CNLabelPhoneNumberMain {
+                if label == CNLabelPhoneNumberMobile {
                     // 获取电话号码对象
                     let phoneNumber = labeledValue.value
                     
                     // 获取字符串形式的电话号码
                     p = phoneNumber.stringValue
-                    
-                    print("\(localizedLabel): \(p)")
                     
                     break
                 }

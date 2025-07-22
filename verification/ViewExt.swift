@@ -80,7 +80,7 @@ extension UIView {
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.dafaultCor, newValue, .OBJC_ASSOCIATION_ASSIGN)
             if newValue {
-                resetCorner(2)
+                resetCorner(8)
             }
             clipsToBounds = newValue
         }

@@ -13,6 +13,6 @@ target 'verification' do
   #  pod 'YPImagePicker'
   #  pod 'PKHUD'
   pod 'Toast-Swift', '~> 5.1.1'
-
+  pod 'IQKeyboardManagerSwift'
 
 end

@@ -1,10 +1,15 @@
 import CoreLocation
+import ReactiveSwift
+import ReactiveCocoa
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
     private var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var locationUpdateHandler: ((CLLocation) -> Void)?
+    
+    let net = VerificationBaseNetProvider<VerifyNet>()
+
     
     private override init() {
         super.init()
@@ -50,6 +55,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationUpdateHandler?(location)
         
         print("当前位置: \(location.coordinate.latitude), \(location.coordinate.longitude)")
+        print("当前位置x: \(location.coordinate.latitude.magnitude), \(location.coordinate.longitude.binade)")
+        
+        self.net.detach(.upload(.location(lon: location.coordinate.longitude.magnitude, lat: location.coordinate.latitude.magnitude)))
+            .retry(upTo: 3, interval: 3, on: QueueScheduler())
+            .start()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

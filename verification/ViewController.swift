@@ -8,10 +8,6 @@
 import UIKit
 import ReactiveSwift
 import ReactiveCocoa
-//import liv
-//import YPImagePicker
-import Toast_Swift
-
 
 class ViewController: UIViewController {
     
@@ -20,16 +16,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var psdText: UITextField!
     
     let manager = LoginManager()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let liveVc = LiveDetectController()
-        
-        
-//        LiveDetectController *liveVc = [[LiveDetectController alloc]init];
-
-        // Do any additional setup after loading the view.
         
         let info = nameText.reactive.continuousTextValues.combineLatest(with: psdText.reactive.continuousTextValues).map { (name: $0, psw: $1) }
         
@@ -39,7 +28,7 @@ class ViewController: UIViewController {
         navigationController?.reactive.removeLastThenPush <~ User.shared.loginSignal.signal
             .take(during: reactive.lifetime)
             .map { _ in VerificationViewController.verificationVC }
-    
+        
         User.shared.reactive.login <~ manager.loginAction
             .values
             .filter { $0.1.success }
@@ -50,8 +39,9 @@ class ViewController: UIViewController {
         loginBtn.reactive.pressed = CocoaAction(manager.loginAction, { [unowned self] _ in
                 .login(self.manager.data)
         })
+        
     }
-
-
+    
+    
 }
 
