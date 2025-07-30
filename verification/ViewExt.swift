@@ -300,3 +300,19 @@ extension MutableProperty where Value == Eyes {
     }
     
 }
+
+import ProgressHUD
+
+extension Reactive where Base : UIViewController {
+    
+     var progressHud: BindingTarget<Bool> {
+        makeBindingTarget { base, value in
+            if value {
+                ProgressHUD.animate(nil, .activityIndicator, interaction: false)
+            } else {
+                ProgressHUD.dismiss()
+            }
+        }
+    }
+    
+}

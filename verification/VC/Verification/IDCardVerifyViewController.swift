@@ -9,6 +9,7 @@ import Foundation
 import PhotosUI
 import ReactiveSwift
 import ReactiveCocoa
+import ProgressHUD
 
 class IDCardVerifyViewController: UIViewController {
     
@@ -29,8 +30,18 @@ class IDCardVerifyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reactive.toast <~ manager.verifyThreeAction.errors.map { $0.description }
+        reactive.toast(0.5) <~ manager.verifyThreeAction.errors.map { $0.description }
             .merge(with: manager.verifyThreeAction.values.map { $0.msg })
+        
+        manager.verifyThreeAction.isExecuting.producer
+            .observe(on: QueueScheduler.main)
+            .startWithValues { isExecuting in
+            if isExecuting {
+                ProgressHUD.animate(nil, .activityIndicator, interaction: false)
+            } else {
+                ProgressHUD.dismiss()
+            }
+        }
     }
     
     fileprivate var choosend = IDType.front
@@ -45,16 +56,19 @@ class IDCardVerifyViewController: UIViewController {
             self.backId?.image = image
         }
         
-        manager.verifyThreeAction.apply(.upload(.idCard(choosend, image))).start()
+        let data = compressImageWithImageIO(image: image) ?? Data()
         
+        manager.verifyThreeAction.apply(.upload(.idCard(choosend, data))).start()
+        
+//        MBProgressHUD.showAdded(to: view, animated: true)
     }
     
     @IBAction func front(_ s: UIButton) {
-        presentPHPicker(.front)
+        checkCameraPermissions(.front)
     }
     
     @IBAction func back(_ s: UIButton) {
-        presentPHPicker(.back)
+        checkCameraPermissions(.back)
     }
     
     
@@ -125,7 +139,62 @@ extension IDCardVerifyViewController: PHPickerViewControllerDelegate, UIImagePic
         if let image = info[.originalImage] as? UIImage {
             //                imageView.image = image
             print(image)
+            self.didChooseImage(image)
         }
         picker.dismiss(animated: true)
+    }
+    
+    func checkCameraPermissions(_ type: IDType) {
+        choosend = type
+            let status = AVCaptureDevice.authorizationStatus(for: .video)
+
+            switch status {
+            case .authorized:
+                presentImageSourceOptions()
+            case .notDetermined:
+                AVCaptureDevice.requestAccess(for: .video) { [weak self] r in
+                    if r {
+                        DispatchQueue.main.async {
+                            self?.presentImageSourceOptions()
+                        }
+                    }
+                }
+                break
+            case .denied, .restricted:
+                presentImageSourceOptions()
+            @unknown default:
+                break
+            }
+        }
+    
+    func compressImageWithImageIO(image: UIImage, maxSizeKB: Int = 100) -> Data? {
+        let maxSizeBytes = maxSizeKB * 1024
+        var imageData = image.jpegData(compressionQuality: 1.0)
+        
+        guard let sourceData = imageData else { return nil }
+        
+        let options: [CFString: Any] = [
+            kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceShouldCacheImmediately: true,
+            kCGImageSourceThumbnailMaxPixelSize: 1024 // 设置最大尺寸
+        ]
+        
+        guard let source = CGImageSourceCreateWithData(sourceData as CFData, nil),
+              let cgImage = CGImageSourceCreateThumbnailAtIndex(source, 0, options as CFDictionary) else {
+            return nil
+        }
+        
+        let compressedImage = UIImage(cgImage: cgImage)
+        var resultData = compressedImage.jpegData(compressionQuality: 0.7)
+        
+        // 如果仍然太大，调整压缩质量
+        var quality: CGFloat = 0.7
+        while (resultData?.count ?? 0) > maxSizeBytes && quality > 0.1 {
+            quality -= 0.1
+            resultData = compressedImage.jpegData(compressionQuality: quality)
+        }
+        
+        return resultData
     }
 }

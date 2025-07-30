@@ -116,10 +116,10 @@ extension EmergencyType {
             return "contactName"
         case .phone:
             return "contactPhone"
-        case .name1: return EmergencyType.name.title + "1"
-        case .phone1: return EmergencyType.phone.title + "1"
-        case .name2: return EmergencyType.name.title + "2"
-        case .phone2: return EmergencyType.phone.title + "2"
+        case .name1: return EmergencyType.name.key + "1"
+        case .phone1: return EmergencyType.phone.key + "1"
+        case .name2: return EmergencyType.name.key + "2"
+        case .phone2: return EmergencyType.phone.key + "2"
         }
     }
 }

@@ -39,15 +39,23 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func startUpdatingLocation() {
+    private func startUpdatingLocation() {
         locationManager.startUpdatingLocation()
     }
     
-    func stopUpdatingLocation() {
+    private func stopUpdatingLocation() {
         locationManager.stopUpdatingLocation()
     }
     
+    let signal = MutableProperty<VerifyUploadable?>(nil);
+    
     // MARK: - CLLocationManagerDelegate
+    
+    lazy var sendLocation: Action<VerifyUploadable, (), AnvilNetError> = {
+        return Action { [unowned self] model in
+            return self.net.detach(.upload(model)).retry(upTo: 3, interval: 3, on: QueueScheduler())
+        }
+    }()
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
@@ -57,9 +65,19 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         print("当前位置: \(location.coordinate.latitude), \(location.coordinate.longitude)")
         print("当前位置x: \(location.coordinate.latitude.magnitude), \(location.coordinate.longitude.binade)")
         
-        self.net.detach(.upload(.location(lon: location.coordinate.longitude.magnitude, lat: location.coordinate.latitude.magnitude)))
-            .retry(upTo: 3, interval: 3, on: QueueScheduler())
+        signal.swap(.location(lon: location.coordinate.longitude.magnitude, lat: location.coordinate.latitude.magnitude))
+        
+        sendLocation
+            .apply(.location(lon: location.coordinate.longitude.magnitude, lat: location.coordinate.latitude.magnitude))
             .start()
+        
+        
+        stopUpdatingLocation()
+//        let f = self.net.detach(.upload(.location(lon: location.coordinate.longitude.magnitude, lat: location.coordinate.latitude.magnitude)))
+//            .retry(upTo: 3, interval: 3, on: QueueScheduler())
+//            .startWithResult({ r in
+//                
+//            }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -69,7 +87,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways:
-            startUpdatingLocation()
+//            startUpdatingLocation()
+            break
         case .denied, .restricted:
             print("用户拒绝或无法使用定位服务")
         case .notDetermined:

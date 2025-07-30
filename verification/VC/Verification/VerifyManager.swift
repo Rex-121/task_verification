@@ -33,7 +33,9 @@ class VerifyManager {
         status <~ getStatus.values
         
         getStatus.errors.observeValues { print($0) }
-        
+        getStatus.values.observeValues { v in
+            print(v)
+        }
         getContacts.values.observeValues { v in
             print(v)
         }
@@ -42,7 +44,7 @@ class VerifyManager {
             print(v)
         }
         
-        getStatus <~ getContacts.values
+        getStatus <~ getContacts.values.delay(0.5, on: QueueScheduler())
     }
     
     func verifyContacts(_ contact: [ContactData]) {
@@ -80,6 +82,8 @@ struct VerifyStatus: Decodable {
     
     let identity5: Int
     
+    let localState: Int
+    
 //    private enum CodingKeys: CodingKey {
 //        
 //    }
@@ -88,8 +92,15 @@ struct VerifyStatus: Decodable {
 //        let container = try decoder.container(keyedBy: CodingKeys.self)
 //    }
     
+    var allVerified: Bool {
+        VerificationTypes.allCases.map { status(by: $0) }
+            .allSatisfy { $0 }
+    }
+    
     func status(by type: VerificationTypes) -> Bool {
         switch type {
+        case .location:
+            return localState == 1
         case .threeObjects:
             return identity3 == 1
         case .contacts:

@@ -11,7 +11,7 @@ import Moya
 enum RegisterNet {
     
     /// 注册
-    case register(_ data: Encodable)
+    case register(_ data: RegisterBaseData)
     
     case login(_ data: LoginBaseData)
     
@@ -37,7 +37,16 @@ extension RegisterNet: VerificationBaseNet {
         switch self {
         
         case .register(let data):
-            return .requestJSONEncodable(data)
+            var dic: [String: String] = [:]
+            
+            for d in data.dic {
+                dic[d.key.key] = d.value
+            }
+            
+            for d in data.emergency.dic {
+                dic[d.key.key] = d.value
+            }
+            return .requestJSONEncodable(dic)
         case .login(let data):
             return .requestParameters(parameters: ["userPhone": data.userPhone, "userPwd": data.userPwd], encoding: URLEncoding())
         }

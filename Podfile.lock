@@ -40,6 +40,7 @@ PODS:
     - IQKeyboardCore
   - IQTextView (1.0.5):
     - IQKeyboardToolbar/Placeholderable
+  - Kingfisher (8.5.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
   - Moya/ReactiveSwift (15.0.0):
@@ -52,6 +53,7 @@ PODS:
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
+  - Kingfisher
   - Moya/ReactiveSwift
   - ReactiveCocoa
   - ReactiveSwift
@@ -68,6 +70,7 @@ SPEC REPOS:
     - IQKeyboardToolbarManager
     - IQTextInputViewNotification
     - IQTextView
+    - Kingfisher
     - Moya
     - ReactiveCocoa
     - ReactiveSwift
@@ -83,11 +86,12 @@ SPEC CHECKSUMS:
   IQKeyboardToolbarManager: 6c693c8478d6327a7ef2107528d29698b3514dbb
   IQTextInputViewNotification: f5e954d8881fd9808b744e49e024cc0d4bcfe572
   IQTextView: ae13b4922f22e6f027f62c557d9f4f236b19d5c7
+  Kingfisher: ff0d31a1f07bdff6a1ebb3ba08b8e6e567b6500c
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   ReactiveCocoa: e539cd41c523c8c80851b88e9723235c933b024b
   ReactiveSwift: fab34244ad908808dc822bae352a058c8837c4ca
   Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
 
-PODFILE CHECKSUM: 19c2ff713cf1e4d2df010665f17922bb06b5417e
+PODFILE CHECKSUM: 2f2bfaf8766cfc54c9ad37f73494d5bd963a62bc
 
 COCOAPODS: 1.16.2

@@ -30,8 +30,15 @@ class VerifyThreeObjectsViewController: UIViewController {
         }
         
         reactive.toast <~ manager.verifyThreeAction.errors.map { $0.description }
-            .merge(with: manager.verifyThreeAction.values.map { $0.msg })
+            .merge(with: manager.verifyThreeAction.values.map { $0.message })
     
+        manager.verifyThreeAction.values
+            .take(first: 1)
+            .delay(0.5, on: QueueScheduler.main).observeValues { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+        }
+        
+        reactive.progressHud <~ manager.verifyThreeAction.isExecuting
     }
     
 }

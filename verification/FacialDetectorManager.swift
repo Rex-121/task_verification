@@ -11,11 +11,9 @@ import ReactiveCocoa
 
 class FacialDetectorManager: NSObject {
     
-    
-    let image = MutableProperty<UIImage?>(nil)
-    
+        
     func getVC() -> LiveDetectController {
-        var liveVc = LiveDetectController()
+        let liveVc = LiveDetectController()
         
         liveVc.signKey = "HISP1YFG44LQ29W0"
         
@@ -54,7 +52,31 @@ class FacialDetectorManager: NSObject {
         }
     }()
     
-    var data = ThreeVerifyData()
+    lazy var getImageAction: Action<Data, String, AnvilNetError> = {
+        return Action { [unowned self] model in
+            return self.net.moya.reactive
+                .request(.getIDImage(model))
+                .parseMoyaError()
+                .attemptMap { response in
+                    guard let value = String(data: response.data, encoding: .utf8) else {
+                        return .failure(.at(business: "图片错误"))
+                    }
+                    return .success(value)
+                }
+                
+        }
+    }()
+    
+    override init() {
+        super.init()
+        reactive.binding(for: \.data.url) <~ getImageAction.values.map { Info.imageHost + $0 }
+    }
+    
+    func tryGetImage() {
+        
+    }
+    
+    var data = WithFaicalVerifyData()
 }
 
 

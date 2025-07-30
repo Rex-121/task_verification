@@ -45,4 +45,7 @@ struct UserData: Decodable {
     
     let id: String
     
+    let userCard: String?
+    
+    let userPhone: String?
 }

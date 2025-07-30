@@ -8,7 +8,7 @@
 import UIKit
 
 import ReactiveSwift
-import  ReactiveCocoa
+import ReactiveCocoa
 
 class FacialVC: UIViewController {
     
@@ -28,15 +28,36 @@ class FacialVC: UIViewController {
         }
         
         
+        
         let vc = manager.getVC()
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
         
+        
+        reactive.toast(0.5) <~ manager.verifyThreeAction.errors.map { $0.description }
+        manager.verifyThreeAction.values.observeValues({ [weak self] v in
+            DispatchQueue.main.async {
+                self?.view.makeToast(v.msg, duration: 0.5) { didTap in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            }
+        })
+        
+        reactive.progressHud <~ manager.verifyThreeAction.isExecuting
+
+//        manager.verifyThreeAction.values.delay(0.5, on: QueueScheduler())
+//            .observeValues { [weak self] _ in
+//                DispatchQueue.main.async {
+//                    self?.navigationController?.popViewController(animated: true)
+//                }
+//            
+//        }
     }
     
     
 }
 
+import Kingfisher
 
 extension FacialVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,10 +70,14 @@ extension FacialVC: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "VerifyThreeWithFacialCellButton", for: indexPath) as! VerifyThreeWithFacialCellButton
             
             cell.btn.reactive.pressed = CocoaAction(manager.verifyThreeAction, { [unowned self] _ in
-                return .three(self.manager.data)
+                return .facial(self.manager.data)
             })
             
-            cell.idImageView.reactive.image <~ manager.image.signal.take(until: cell.reactive.prepareForReuse)
+//            cell.idImageView.reactive.kf.image
+            
+            cell.idImageView.reactive.kf_image() <~ manager.getImageAction.values.map { Info.imageHost + $0 }
+            
+//            cell.idImageView.reactive.image <~ manager.image.signal.take(until: cell.reactive.prepareForReuse)
             
             return cell
         }
@@ -92,13 +117,25 @@ extension FacialVC: LiveDetectControllerDelegate {
     func onCompleted(_ live: Bool, with imageData: Data, rect faceRect: CGRect) {
         
         if live {
-            manager.image.swap(UIImage(data: imageData))
+            
+            manager.getImageAction.apply(imageData).start()
+            
         }
     }
     
 }
 
-
+extension Reactive where Base == UIImageView {
+    
+    func kf_image() -> BindingTarget<String> {
+        return makeBindingTarget { base, value in
+            DispatchQueue.main.async {
+                base.kf.setImage(with: URL(string: value)!)
+            }
+        }
+    }
+    
+}
 
 class VerifyThreeWithFacialCellButton: UITableViewCell {
     

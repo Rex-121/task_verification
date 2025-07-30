@@ -14,9 +14,9 @@ class VerifyThreeManager {
     
     let net = VerificationBaseNetProvider<VerifyNet>()
         
-    lazy var verifyThreeAction: Action<VerifyNet, VerifyThreeResponse, AnvilNetError> = {
+    lazy var verifyThreeAction: Action<VerifyNet, BasicInfo, AnvilNetError> = {
         return Action { [unowned self] model in
-            return self.net.detach(model, VerifyThreeResponse.self)
+            return self.net.brief(model)
         }
     }()
     
